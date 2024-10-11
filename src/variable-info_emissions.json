@@ -1,0 +1,22 @@
+{
+    "em-AIR-anthro": {
+        "var": {"boundaries":[0, null]}
+    },
+    "em-anthro": {
+        "var": {"boundaries":[0, null]}
+    }, 
+    "em-openburning": { 
+        "var": {"boundaries":[0, null]}
+    },
+    "em-openburning-shares": {
+        "var": {"boundaries":[0, null]}
+    },
+    "em-SOLID-BIOFUEL-anthro": {
+        "var": {"boundaries":[0, null]}
+    }, 
+    "em-SHP-anthro": {
+        "var": {"boundaries":[0, null]}
+    }
+}
+
+  

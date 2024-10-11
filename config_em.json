@@ -1,0 +1,24 @@
+{
+    "directory":"/esarchive/scratch/esarchive_ftp/rescue/forcings/emissions/2024-08-19",            
+    "references": {
+        "em-AIR-anthro": ["/esarchive/scratch/esarchive_ftp/rescue/reference/emissions/BC-em-AIR-anthro_input4MIPs_emissions_ScenarioMIP_IAMC-AIM-ssp370-1-1_gn_201501-210012.nc"],
+        "em-anthro": ["/esarchive/scratch/esarchive_ftp/rescue/reference/emissions/CO2-em-anthro_input4MIPs_emissions_ScenarioMIP_IAMC-IMAGE-ssp126-1-1_gn_201501-210012.nc"],
+        "em-openburning": ["/esarchive/scratch/esarchive_ftp/rescue/reference/emissions/BC-em-openburning_input4MIPs_emissions_ScenarioMIP_IAMC-AIM-ssp370-1-1_gn_201501-210012.nc"] 
+    },
+    "log_path":"logs",
+    "base_path":"/esarchive/scratch/Earth/dkuznets/rescue_proj/scenario_checker/scenario_checker_landuse_emissions", 
+    "flag_spatial_completeness":true,
+    "flag_spatial_consistency":true,
+    "flag_temporal_consistency":true,
+    "flag_valid_ranges":true,
+    "required_file_types": [
+        "em-AIR-anthro", "em-anthro", "em-openburning", "em-openburning-shares", "em-SOLID-BIOFUEL-anthro", "em-SHP-anthro"],
+    "required_variables":{
+    },
+    "required_coords":{
+        "em-AIR-anthro": ["lon", "lat", "level", "time"],
+        "em-anthro": ["lon", "lat", "sector","time"],
+        "em-openburning": ["lon", "lat", "time"]
+    },
+    "required_attributes": ["activity_id", "contact", "dataset_category", "grid_label", "source_id", "target_mip"]      
+}
