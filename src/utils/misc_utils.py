@@ -60,7 +60,6 @@ def get_file_re_pattern(data_source: str) -> str:
     else:
         return r'[a-zA-Z0-9-_]{1,400}_input4MIPs_emissions_[a-zA-Z0-9-._]{1,400}_gn_(\d{6})\-(\d{6})\.nc$'
 
-        #return r'[a-zA-Z0-9-._]{1,400}_(\d{6})-(\d{6})\.nc$'
     
     
 

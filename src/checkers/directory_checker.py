@@ -102,11 +102,8 @@ class DirectoryChecker:
        
         with open(file_path, 'r') as f:
             
-            print(f"debug: self.file_type={self.file_type}, elf.data_source={self.data_source}")
-            
             if self.data_source == 'landuse':   
                 
-                #variables = json.load(f)[self.filename_firstpart]
                 variables = json.load(f)[self.file_type]
             
                 if list(variables.keys())==[]:
@@ -114,8 +111,6 @@ class DirectoryChecker:
                         f"No valid ranges information for the file {self.file}"
                     )
 
-
-                #if self.file_type == 'landuse':    
                 for var in self.required_variables: 
                     if var in list(variables.keys()):
                         
@@ -133,37 +128,27 @@ class DirectoryChecker:
                         logging.info(
                         f"Valid range of variable {var} is defined but the variable is not in the required variable list"
                     )
-                
-            
             
                                     
             # emissions
             else:
             
                 if self.data_source == 'emissions':
-                    #var_em = '-'.join(self.required_variables.split('-', 1)[1:]) #[0]
-                    #var_em = self.required_variables
-                    var_em = self.file_type #required_variables
-                    print(f"emission debug: var_em={var_em}")
+                    var_em = self.file_type 
                     # We set the same boundaries for all gas species and name the variable 'var' in variable-info_emissions.json 
                     tempvarname_for_emissions = 'var'
 
-
-
-
-
-
                     variables = json.load(f)[var_em]
-                    print(f"emission variables={variables}")
+                    # logging.info(f"emission variables={variables}")
                     logging.info(
                         f"Reading {var_em} variable boundary information from variable-info_emissions.json: "
                         f"{variables[tempvarname_for_emissions]['boundaries']}"
                     )
                     
                     self.boundaries[var_em] = variables[tempvarname_for_emissions]['boundaries'] 
-                    print(f"self.boundaries[var_em]={self.boundaries[var_em]}")
+                    #logging.info(f"self.boundaries[var_em]={self.boundaries[var_em]}")
                 else:
-                    print(f"Error: Wrong data_source: should be only 'landuse' or 'emissions'")
+                    logging.error(f"Error: Wrong data_source: should be only 'landuse' or 'emissions'")
                     
         return       
     
@@ -226,7 +211,6 @@ class DirectoryChecker:
                 
                 # for landuse varname=''
                 self.varname, self.file_type, self.filename_firstpart = get_file_type(self.file_name_corrected) 
-                print(f"debug: varname={self.varname}, file_type={self.file_type}, filename_firstpart={self.filename_firstpart} ")
                 
                 chk = FileNameChecker(self)
                 chk.run_checker()
@@ -246,18 +230,11 @@ class DirectoryChecker:
                     else:
                         self.data_source = 'emissions' 
                         self.required_variables = [self.filename_firstpart.replace('-','_')] #.split('-')[1:] #.replace('-','_')]
-                        #self.required_variables = '-'.join(self.filename_firstpart.split('-', 1)[1:]) #.replace('-','_')
-                        print(f"self.required_variables: {self.required_variables}")
+                        
+                        #logging.info(f"self.required_variables: {self.required_variables}")
                         self.read_variable_info(
                             self.base_path + '/src/variable-info_emissions.json'
                         )   
-
-                    # Check this
-                    '''
-                    self.read_variable_info(
-                        self.base_path + '/src/variable-info.json'
-                    )
-                    '''
                         
                     self.coordinate_list = self.required_coords[self.file_type] 
                         
@@ -297,7 +274,7 @@ class DirectoryChecker:
                                             'unit', 'method', 'level', 'level_bnds', 'bounds_lon', 'bounds_lat', 'bounds_time']
                             self.variable_list = [v for v in self.variable_list if v not in vars_to_remove]
                                
-                            print(f"required_variables={self.required_variables}")
+                            #logging.info(f"required_variables={self.required_variables}")
                             for var in self.required_variables:
                                 
                                 if var not in self.variable_list:

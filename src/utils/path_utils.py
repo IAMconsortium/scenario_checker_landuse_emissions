@@ -12,11 +12,9 @@ def get_file_type(file_name) -> str:
 
     filename_firstpart = file_name.split('_')[0]
     if 'multiple' in filename_firstpart:
-        #print(f"debug: {filename_firstpart} -> landuse")
         file_type = filename_firstpart 
         varname = ''
     else:
-        #print(f"debug: {filename_firstpart} -> emissions")
         s1 = filename_firstpart.split('-')[1:]
         file_type = '-'.join(s1)
         varname = filename_firstpart.replace('-','_')

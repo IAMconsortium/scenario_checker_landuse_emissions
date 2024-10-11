@@ -83,7 +83,7 @@ def main():
     temp_root = Path(
         args.base_path + '/tmp' 
         )
-    print(temp_root)
+    
     # Replicate file tree inside temp dir
     temp_dir = temp_root / str(file.parents[0].absolute())[1:]
 
@@ -94,8 +94,8 @@ def main():
     try:
         run_checker(args, temp_dir)
     except Exception:
-        print('An exception occurred during data check.')
-        print('Removing all temporary files')
+        logging.error('An exception occurred during data check.')
+        logging.error('Removing all temporary files')
         delete_temp_dir(temp_root)
         raise
 

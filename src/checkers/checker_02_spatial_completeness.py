@@ -118,7 +118,7 @@ class SpatialCompletenessChecker:
                             
                             total_sectors = len(self.ds.sector)
                             if i==0:
-                                print(f"Checking sectors: total sectors: {total_sectors}")
+                                logging.info(f"Checking sectors: total sectors: {total_sectors}")
                             data = []
                             for i_sector in range(0, total_sectors-1):
                                 #if self.ds.sector[i_sector].values != 'Agriculture' or self.ds.sector[i_sector] != 'CDR EW':
@@ -138,7 +138,7 @@ class SpatialCompletenessChecker:
                         else:
                             data = data_array.isel(time=i)
                         
-                        valid_data = np.array(data) #.flatten()
+                        valid_data = np.array(data) 
 
 
                     result_timestep = 0

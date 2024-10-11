@@ -149,7 +149,7 @@ class StatesTransitionsChecker:
 
             else:
 
-                trans = self.ds #xr.open_dataset(os.path.join(indir, file_transitions), decode_times=False)
+                trans = self.ds
                 states = xr.open_dataset(os.path.join(self.directory, file_states), decode_times=False)
                 self.check_states_vs_transitions(trans, states, vars_to_remove_2)
 
@@ -160,7 +160,7 @@ class StatesTransitionsChecker:
                 logging.info(
                     f"This is a multiple-states file. Checking that the sum of all variables should be close to 1"
                 )
-                states = self.ds # xr.open_dataset(os.path.join(indir, file_states), decode_times=False)
+                states = self.ds 
                
                 self.check_sum_of_all_vars(states, vars_to_remove_1)
 

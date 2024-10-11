@@ -1,5 +1,3 @@
-# Check this
-
 import logging
 from dateutil.relativedelta import relativedelta
 
