@@ -5,7 +5,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-from utils.misc_utils import get_valid_data #, get_invalid_data
+from utils.misc_utils import get_valid_data
 
 
 class SpatialCompletenessChecker:
@@ -113,7 +113,7 @@ class SpatialCompletenessChecker:
                         
                     # emissions
                     else:
-                        #valid_data = data.flatten()
+                        
                         if 'sector' in list(self.ds.dims):
                             
                             total_sectors = len(self.ds.sector)
@@ -121,7 +121,7 @@ class SpatialCompletenessChecker:
                                 logging.info(f"Checking sectors: total sectors: {total_sectors}")
                             data = []
                             for i_sector in range(0, total_sectors-1):
-                                #if self.ds.sector[i_sector].values != 'Agriculture' or self.ds.sector[i_sector] != 'CDR EW':
+                                
                                 data_i = data_array.isel(time=i,sector=i_sector)
                                 
                                 if np.isnan(data_i).all():
@@ -134,7 +134,7 @@ class SpatialCompletenessChecker:
                                             f'Some nans for sector={self.ds.sector[i_sector].values} at time={i}'
                                         )
                                         data.append(data_i.values)
-                            #data = data_array.isel(time=i).values
+                            
                         else:
                             data = data_array.isel(time=i)
                         

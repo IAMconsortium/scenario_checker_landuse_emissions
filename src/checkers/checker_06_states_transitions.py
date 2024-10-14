@@ -17,7 +17,7 @@ class StatesTransitionsChecker:
        
 
 
-    # check No 1: only for states - sum of all vars should be equal to 1 - I checked, this is ok for all files
+    # check No 1: only for states - sum of all vars should be equal to 1
     # "states" is the file corresponding to the transition file self.file
     def check_sum_of_all_vars(self, states, vars_to_remove):
     
@@ -55,7 +55,7 @@ class StatesTransitionsChecker:
 
 
     # check No 2: the sum of the gross landuse transitions should be equal to the difference in states between two consecutive years 
-    # this is ok for the reference files but delta is not close to 0 for the forcings files
+    # this is ok for the reference files but delta is (sometimes?) not close to 0 for the forcings files
 
     def check_states_vs_transitions(self, trans, states, vars_to_remove):
 
@@ -86,8 +86,11 @@ class StatesTransitionsChecker:
                 
                 thisyear = states[var].isel(time=t).values
                 
-                # this is just in case if we want to select either 1. this year and the next year or 2. this year and the previous year 
-                # yeartocheck = t+1 or t-1
+                # this is just in case if we want to select either 
+                # 1. this year and the next year, or 
+                # 2. this year and the previous year 
+                # yeartocheck = t+1 or t-1 
+                # we selected t+1 based on the tests with the historical files 
                 yeartocheck = t+1
                 
                 anotheryear = states[var].isel(time=yeartocheck).values

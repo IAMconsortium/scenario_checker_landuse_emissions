@@ -28,6 +28,7 @@ class TemporalConsistencyChecker:
       
         # Only for landuse files
         if (self.data_source == 'landuse'):
+            
             for i, timestep in enumerate(timesteps):
                     
                 # Skip first timestep
@@ -36,7 +37,16 @@ class TemporalConsistencyChecker:
                     continue
 
                 # Check timesteps 
-                if i<=9:
+                # i is the number of the timesteps in the file
+                # time = "2020-01-01" [0], "2025-01-01" [1], "2030-01-01" [2], "2035-01-01" [3], "2040-01-01" [4],
+                #        "2045-01-01" [5], "2050-01-01" [6], "2055-01-01" [7], "2060-01-01" [8], "2070-01-01" [9], 
+                #        "2080-01-01" [10], "2090-01-01" [11], "2100-01-01" [12]
+                # The 'time' array is replaced by the 'timestep' array:
+                # timesteps = [50, 55, 60, 65, 70, 75, 80, 85, 90, 100, 110, 120, 130]
+                # timediff is the difference between two consequtive timesteps: timediff = timesteps[i] - timesteps[i-1]
+                # for i<=8 (before 2060), timediff should be 5 years, for other i timediff should be 10 years
+                
+                if i<=8:
                     timediff = 5
                 else:
                     timediff = 10
@@ -44,7 +54,8 @@ class TemporalConsistencyChecker:
                 if previous_time + timediff != timestep:
                     self.results['timestep_spacing'] = 2
                     logging.error(
-                        f"Timesteps are not consistent: {previous_time} + {timediff} vs {timestep}"
+                        #f"Timesteps are not consistent: timestep[{i}]={timestep} but expected timestep[{i}]={previous_time+timediff}"
+                        f"Timesteps are not consistent: time[{i}]-time[{i-1}]={timestep-previous_time} years but expected {timediff} years"
                     )
                 else:
                     self.results['timestep_spacing'] = 0

@@ -54,7 +54,7 @@ def get_file_re_pattern(data_source: str) -> str:
     logging.info(
         f'Found {data_source} variable(s)'
     )
-    #print(data_source)
+    
     if data_source == 'landuse':
         return r'multiple-[a-zA-Z0-9-_]{1,200}_input4MIPs_landState_[a-zA-Z0-9-._]{1,200}_gn_(\d{4})\-(\d{4})\.nc$'
     else:

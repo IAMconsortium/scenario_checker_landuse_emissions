@@ -16,7 +16,7 @@ Install requirements with:
 
 <br>
 
-2. Configure the file `config_lu.json` which contains the following settings:
+2. Configure the config file (`config_lu.json` for landuse or `config_em.json` for emissions), which contains the following settings:
    - `directory`: the directory with the files requiring checking;
    - `log_path`: where to save logs (relative path inside the checker directory);
    - `base_path`: full path to the checker directory;
@@ -28,10 +28,10 @@ Install requirements with:
 
 <br>
 
-3. Configure the file `${checkerdir}/src/variable-info.json` which contains the variable ranges requirements (for each file type independently).
+3. Configure the file `${checkerdir}/src/variable-info_landuse.json` or `${checkerdir}/src/variable-info_emissions.json` which contains the variable ranges requirements (for each file type independently).
 <br>
 
-4. Run: `python run_script.py config_lu.json`. 
+4. Run: `python run_script.py config_lu.json` or `python run_script.py config_em.json`. 
 
 ## Checkers 
 
@@ -61,6 +61,20 @@ Check that the lon/lat grid points correspond to the reference file.
 
 Check timesteps for consistency.
 It uses functions from `${checkerdir}/src/utils/path_utils.py`.
+
+`i` is the number of the timestep in the file:<br>
+`time` = "2020-01-01" [0], "2025-01-01" [1], "2030-01-01" [2], "2035-01-01" [3], "2040-01-01" [4],
+        "2045-01-01" [5], "2050-01-01" [6], "2055-01-01" [7], "2060-01-01" [8], "2070-01-01" [9], 
+        "2080-01-01" [10], "2090-01-01" [11], "2100-01-01" [12]<br>
+
+During the check, the 'time' array is replaced by the 'timestep' array:<br>
+`timesteps` = [50, 55, 60, 65, 70, 75, 80, 85, 90, 100, 110, 120, 130]<br>
+               
+`timediff` is the difference between two consequtive timesteps: `timediff = timesteps[i] - timesteps[i-1]`.<br> 
+Here we have `timefiff` of either 5 or 10 years:<br>
+- for `i`<=8 (before 2060) `timediff` should be 5 years
+- for other `i` (after 2060) `timediff` should be 10 years
+
 <br>
 
 **ValidRangesChecker**: `${checkerdir}/src/checkers/checker_05_valid_ranges.py`

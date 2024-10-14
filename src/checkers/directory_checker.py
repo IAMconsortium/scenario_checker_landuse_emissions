@@ -229,7 +229,7 @@ class DirectoryChecker:
                         )
                     else:
                         self.data_source = 'emissions' 
-                        self.required_variables = [self.filename_firstpart.replace('-','_')] #.split('-')[1:] #.replace('-','_')]
+                        self.required_variables = [self.filename_firstpart.replace('-','_')] 
                         
                         #logging.info(f"self.required_variables: {self.required_variables}")
                         self.read_variable_info(

@@ -36,6 +36,9 @@ class ValidRangesChecker:
 
         if 'time' in list(data_array.dims): 
             
+            # counter to show the number of the timestep
+            tt_ind=0
+
             for tt, data_at_timestep in data_array.groupby('time'):
 
                 self.results['boundaries_min'] = 0
@@ -63,21 +66,22 @@ class ValidRangesChecker:
                 if (self.results['boundaries_max'] != 0):
                     logging.error(
                         f'Invalid values of {var} '
-                        f'in file {self.file.name} at timestep {tt}: '
+                        f'in file {self.file.name} at t={tt_ind}: '
                         f'data_max = {data_max:.2e} > required max = {max_value}'
                     )
                 if (self.results['boundaries_min'] != 0):
                     logging.error(
                         f'Invalid values of {var} '
-                        f'in file {self.file.name} at timestep {tt}: '
+                        f'in file {self.file.name} at t={tt_ind}: '
                         f'data_min = {data_min:.2e} < required min = {min_value}'
                     ) 
                 
                 if (self.results['boundaries_max'] == 0 and self.results['boundaries_min'] == 0):
                     logging.info(
-                        f'   Correct values of {var} at timestep {tt}'
+                        f'   Correct values of {var} at t={tt_ind}'
                     )
-                    
+
+                tt_ind = tt_ind + 1 
                         
         else:
 
